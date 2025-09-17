@@ -1,0 +1,54 @@
+myStudents = {}
+print('Welcome to our Dictionary Simulation!')
+
+while 1:
+    print('Choose one of the followng choices:')
+    print("1. Add a record to the Dictionary")
+    print('2. Delete a record to the Dictionary')
+    print('3. Replace a record to the Dictionary')
+    print('4. Print the Dictionary')
+    print('5. Quit')
+
+    option = int(input())
+    if option == 1:
+        sid = input("Enter student ID:")
+        nname = input('Enter student name:')
+        mmajor = input('Enter student major')
+        yyear = input('Enter student year')
+        ttcc = input('Enter Total Credits')
+        ggpa = input('Enter GPA')
+        myStudents.update({sid: {
+            'name': nname,
+            'major': mmajor,
+            'year': yyear,
+            'Tcredits': ttcc,
+            'gpa': ggpa,
+        }})
+    elif option == 2:
+        studel = input()
+        del myStudents[studel]
+    elif option == 3:
+        for StuID in myStudents:
+            specID = myStudents.get(sid)
+            print(specID)
+        sid = input("Enter student ID to be replaced:")
+        nname = input('Enter updated student name:')
+        mmajor = input('Enter updated student major')
+        yyear = input('Enter updated student year')
+        ttcc = input('Enter updated Total Credits')
+        ggpa = input('Enter updated GPA')
+        myStudents.update({sid: {
+            'name': nname,
+            'major': mmajor,
+            'year': yyear,
+            'Tcredits': ttcc,
+            'gpa': ggpa,
+        }})
+    elif option == 4:
+        for student_record in myStudents.items():
+            print(student_record)
+            print('______________________________________________')
+    elif option ==5:
+        break
+    else:
+        print('ERROR: Please input a valid option')
