@@ -2,14 +2,17 @@ myStudents = {}
 print('Welcome to our Dictionary Simulation!')
 
 while 1:
-    print('Choose one of the followng choices:')
+    print('Choose one of the following choices:')
     print("1. Add a record to the Dictionary")
     print('2. Delete a record to the Dictionary')
     print('3. Replace a record to the Dictionary')
     print('4. Print the Dictionary')
     print('5. Quit')
-
-    option = int(input())
+    try:
+        option = int(input())
+    except ValueError:
+        print("Error please enter a valid option!")
+        continue
     if option == 1:
         sid = input("Enter student ID:")
         nname = input('Enter student name:')
@@ -25,25 +28,38 @@ while 1:
             'gpa': ggpa,
         }})
     elif option == 2:
-        studel = input()
-        del myStudents[studel]
-    elif option == 3:
+        print("Current student records:")
         for StuID in myStudents:
-            specID = myStudents.get(sid)
-            print(specID)
+            print(StuID)
+            print("---------------------------------------------")
+        studel = input("Enter student ID to delete:")
+        if studel in myStudents:
+            del myStudents[studel]
+            print("Record deleted.")
+        else:
+            print("Student ID not found.")
+    elif option == 3:
+        print("Current student records:")
+        for StuID in myStudents:
+            print(StuID)
+            print("---------------------------------------------")
         sid = input("Enter student ID to be replaced:")
-        nname = input('Enter updated student name:')
-        mmajor = input('Enter updated student major')
-        yyear = input('Enter updated student year')
-        ttcc = input('Enter updated Total Credits')
-        ggpa = input('Enter updated GPA')
-        myStudents.update({sid: {
-            'name': nname,
-            'major': mmajor,
-            'year': yyear,
-            'Tcredits': ttcc,
-            'gpa': ggpa,
-        }})
+        if sid in myStudents:
+            nname = input('Enter updated student name:')
+            mmajor = input('Enter updated student major:')
+            yyear = input('Enter updated student year:')
+            ttcc = input('Enter updated Total Credits:')
+            ggpa = input('Enter updated GPA:')
+            myStudents[sid] = {
+                'name': nname,
+                'major': mmajor,
+                'year': yyear,
+                'Tcredits': ttcc,
+                'gpa': ggpa,
+            }
+            print("Record updated.")
+        else:
+            print("Student ID not found.")
     elif option == 4:
         for student_record in myStudents.items():
             print(student_record)
