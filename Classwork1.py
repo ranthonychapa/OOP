@@ -22,3 +22,4 @@ hours = int(input("Enter your hours: "))
 days = int(input("Enter your days: "))
 monthly_wages = wages*hours*days
 print(monthly_wages)
+
