@@ -98,11 +98,6 @@ class customer:
             print(f'{user.cname} assigned {card.c_no} successfully!')
             print('----------------------------------------------')
 
-
-    #def display_all(self):
-        #for x in customer:
-           # print(x.cid,':', x.cname)
-
 class Card:
     def __init__(self):
         self.type = ''
@@ -145,12 +140,18 @@ class Card:
                 print('----------------------------------------------')
     def charge_card(self):
         balancetaken = float(input('How Much are we charging the customer today?:'))
-        self.balance = self.balance - balancetaken
+        if card.type == 'Debit Card':
+            self.balance = self.balance - balancetaken
+        else:
+            self.balance = self.balance + balancetaken
         print('----------------------------------------------')
 
     def credit_to_card(self):
         Creditgiven = float(input('How much are we crediting the customer today?:'))
-        self.balance = self.balance + Creditgiven
+        if card.type == 'Debit Card':
+            self.balance = self.balance + Creditgiven
+        else:
+            self.balance = self.balance - Creditgiven
         print('----------------------------------------------')
 
     def display_card_info(self):
@@ -200,10 +201,12 @@ while True:
     print('7. Add a new card to the database')
     print("8. Assign Card to customer")
     print('9. Display Card Information')
+    print('10. Deposit Money to Card')
+    print('11. Charge Card')
     print('--------------------------------------------')
     print('Miscellaneous Functions:')
-    print('10. Save to file')
-    print('11. Exit')
+    print('12. Save to file')
+    print('13. Exit')
     print('-------------------------------------------')
     try:
         option = int(input('Option Selected:'))
@@ -362,13 +365,67 @@ while True:
         else:
             for card in card_list:
                 card.display_card_info()
-    elif option == 10:
+    elif option ==10:
+        if not card_list:
+            print('Error!! No cards currently exists!!')
+        else:
+            print('Current Cards:')
+            for card in card_list:
+                card.display_card_info()
+
+            while True:
+                try:
+                    card_select = int(input("Which Card would you want to deposit funds into"))
+                    card_searched = 0
+                    for card in card_list:
+                        if card.c_no == card_select:
+                            card_searched = card
+                            break
+                    if card_searched:
+                        card_searched.credit_to_card()
+                        print("Deposit complete")
+                        print('_____________________________________')
+                        break
+                    else:
+                        print('Error!!! Card Number not found')
+                        print('_____________________________________')
+                        break
+                except ValueError:
+                    print("Please enter a valid number.")
+    elif option ==11:
+        if not card_list:
+            print('Error!! No cards currently exists!!')
+        else:
+            print('Current Cards:')
+            for card in card_list:
+                card.display_card_info()
+
+            while True:
+                try:
+                    card_select = int(input("Which Card would you want to charge"))
+                    card_searched = 0
+                    for card in card_list:
+                        if card.c_no == card_select:
+                            card_searched = card
+                            break
+                    if card_searched:
+                        card_searched.charge_card()
+                        print("Charge complete")
+                        print('_____________________________________')
+                        break
+                    else:
+                        print('Error!!! Card Number not found')
+                        print('_____________________________________')
+                        break
+                except ValueError:
+                    print("Please enter a valid number.")
+    elif option == 12:
         f1 = open("Bankdata.dat", "ab")
         pickle.dump(customer_list, f1)
         pickle.dump(card_list, f1)
         f1.close()
         print("Data saved successfully to Bankdata.dat")
-    elif option ==11:
+    elif option ==13:
         print('Thank you for using the Banking Database, Please come again!')
         break
     else:
