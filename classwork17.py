@@ -15,15 +15,17 @@ class Queue:
         #valueTxt = text(top............)
         x = display.get(1.0, "end-1c")
         self.element.append(x)
+        display.delete(1.0, END)
 
     def dequeue(self):
         self.element.pop(0)
 
     def displayqueue(self):
         print('Elements in Queue:')
+        display2.delete(1.0, END)
         for i in self.element:
             print(i)
-        display2.insert(q1, 'Elements in Queue:')
+            display2.insert(tk.INSERT, f'{i},')
 
 q1 = Queue()
 q2 = Queue()
