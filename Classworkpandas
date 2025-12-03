@@ -1,0 +1,22 @@
+import pandas as pd
+mydata = {'cars':['Mercedes', 'Lamborghini', 'Porshe','Pagani', 'Shelby'],
+           'Price':['120000', '250000', '135000','5300000','80000']}
+df = pd.read_csv('data.csv')
+
+df.head(10)
+df.fillna('120',inplace=False)
+
+x = df['Calories'].mean
+print('Mean:', x)
+df.fillna(x)
+
+for x in df.index:
+  average_val = (df.loc[x, 'Pulse'] + df.loc[x, 'Maxpulse'])/2
+  df.loc[x, 'Average Column'] = average_val
+
+import matplotlib.pyplot as plt
+df.plot()
+plt.show()
+
+df.plot(kind = 'scatter', x = 'Duration', y = 'Calories')
+plt.show()
